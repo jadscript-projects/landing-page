@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 @import "tailwindcss";
+@import "./animations.css";
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #222222;
+  --color-black: #222222
+}
 
 body {
   margin: 0;
@@ -7,7 +14,7 @@ body {
   /* font-family: "Google Sans", sans-serif; */
   font-family: "Fira Code", monospace;
   background-color: #ffffff;
-  color: #000000;
+  color: #222222;
 }
 
 .font-fira-code {

@@ -4,5 +4,18 @@
     "about": "Sobre",
     "works": "Trabalhos",
     "contact": "Contato"
+  },
+  "home": {
+    "title": "Desenvolvendo para Pessoas Incríveis",
+    "description": "Desenvolvendo há mais de 8 anos com paixão por construir as melhores aplicações web",
+    "hireMe": "Contrate-me!",
+    "position-1": "Desenvolvedor Full Stack",
+    "position-2": "Desenvolvedor Backend",
+    "position-3": "Desenvolvedor Frontend"
+  },
+  "about": {
+    "words": "Descobrindo, Construindo, Inovando",
+    "title": "Sobre Mim",
+    "description": "Sou um desenvolvedor full stack com paixão por construir as melhores aplicações web"
   }
 }

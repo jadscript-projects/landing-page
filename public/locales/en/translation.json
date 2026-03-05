@@ -4,5 +4,18 @@
     "about": "About",
     "works": "Works",
     "contact": "Contact"
+  },
+  "home": {
+    "title": "Developing for Amazing People",
+    "description": "Developing for over 8 years with a passion for building the best web applications",
+    "hireMe": "Hire me!",
+    "position-1": "Full Stack Developer",
+    "position-2": "Backend Developer",
+    "position-3": "Frontend Developer"
+  },
+  "about": {
+    "words": "Discovering, Building, Innovating",
+    "title": "About Me",
+    "description": "I'm a full stack developer with a passion for building the best web applications"
   }
 }

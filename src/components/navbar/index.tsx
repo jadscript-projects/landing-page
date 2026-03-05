@@ -16,19 +16,15 @@ const Navbar = () => {
   return (
     <nav className="flex flex-col md:flex-row justify-center md:justify-between items-center py-4">
       <div className="hidden md:flex">
-        <h1 className="text-2xl font-bold font-fira-code">Jadscript</h1>
+        <h1 className="text-2xl font-bold font-fira-code">jadscript.dev</h1>
       </div>
       <ul className="flex gap-2">
         {navbarItems.map((item) => (
           <NavbarItem key={item.href} {...item} />
         ))}
-        <div className="hidden md:block"> 
-          <LanguageSwitcher />
-        </div>
+          <LanguageSwitcher className="hidden md:flex" />
       </ul>
-      <div className="md:hidden">
-        <LanguageSwitcher />
-      </div>
+      <LanguageSwitcher className="md:hidden" />
     </nav>
   );
 };

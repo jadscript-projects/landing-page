@@ -1,0 +1,21 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "works": "Trabajos",
+    "contact": "Contacto"
+  },
+  "home": {
+    "title": "Desarrollando para Personas Increíbles",
+    "description": "Desarrollando por más de 8 años con pasión por construir las mejores aplicaciones web",
+    "hireMe": "¡Contrátame!",
+    "position-1": "Desarrollador Full Stack",
+    "position-2": "Desarrollador Backend",
+    "position-3": "Desarrollador Frontend"
+  },
+  "about": {
+    "words": "Descubriendo, Construyendo, Inovando",
+    "title": "Acerca de Mí",
+    "description": "Soy un desarrollador full stack con pasión por construir las mejores aplicaciones web"
+  }
+}
