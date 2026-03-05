@@ -23,8 +23,8 @@ function App() {
   return (
     <div className="flex flex-col py-6">
       <HomeSection />
-      <div className="bg-linear-to-r from-cyan-300 to-lime-300 h-25 -mt-2 z-10 w-[calc(100vw+32px)] -ml-20"></div>
-      <div className="bg-black h-20 -mt-22 z-10 -rotate-3 w-[calc(100vw+32px)] -ml-20 flex items-center">
+      <div className="bg-linear-to-r from-cyan-300 to-lime-300 h-24 -mt-2 z-10 relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw]"></div>
+      <div className="bg-black h-20 -mt-20 z-10 -rotate-3 2xl:-rotate-2 relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] flex items-center">
         <div className="marquee w-full">
           <div className="marquee-content">
             {wordsArray.map((word, index) => (
