@@ -4,6 +4,7 @@
     "home": "Home",
     "about": "About",
     "works": "Experiences",
+    "skills": "Skills",
     "contact": "Contact"
   },
   "home": {
@@ -17,11 +18,67 @@
   "about": {
     "words": "Discovering, Building, Innovating",
     "title": "I'm fascinated by challenges and creative solutions",
+    "titlePrefix": "I'm fascinated by ",
+    "titleHighlight1": "challenges",
+    "titleMiddle": " and ",
+    "titleHighlight2": "creative solutions",
     "paragraph-1": "My name is Jadson Teixeira and I'm a senior full stack engineer with over 8 years of experience in software development, I focus on building scalable and high-performance web applications.",
     "paragraph-2": "Expertise includes Java, Spring Boot, Node, Nest.js, React, Next.js, and modern UI/UX practices, as well as a solid background in full stack development involving APIs, databases, and cloud services.",
     "paragraph-3": "Mainly working with high availability systems for AI and fintech environments, I'm passionate about clean code, automated testing (unit, integration, and E2E), agile methodologies, CI/CD, and continuous technical and personal improvement."
   },
   "social": {
     "title": "Follow me on:"
+  },
+  "experiences": {
+    "title": "Companies I've worked with",
+    "daai": {
+      "title": "Doctor Assistant AI",
+      "role": "Senior Software Engineer",
+      "description": "Led a team of 5 developers in the creation of an AI-powered assistant platform for healthcare, serving both B2B and B2C markets.\nDesigned and implemented backend APIs using NestJS following Clean Architecture and Domain-Driven Design (DDD) principles, with a microservices approach focused on scalability, testability, and clear domain boundaries.\nBuilt distributed systems integrating Redis (caching and queues), MongoDB and PostgreSQL (polyglot persistence), and RabbitMQ/Kafka for asynchronous communication and event-driven workflows.\nIntegrated AI capabilities into the platform using OpenAI, Whisper (speech-to-text), and Gemini, enabling intelligent conversational flows, transcription, and decision support features.\nDelivered frontends using Next.js with full internationalization (i18n) and Tailwind CSS for scalable UI development.\nDesigned and maintained a shared component library to enable third-party integrations and white-label solutions.\nBuilt and maintained robust CI/CD pipelines with GitHub Actions, ensuring fast, reliable, and automated deployments.\nDeployed and monitored the platform on Google Cloud Platform (GCP) and AWS, implementing disaster recovery mechanisms and automated alerts for high availability.\nEngineered the platform to handle over 1,500 AI-driven consultations per day, ensuring performance, resilience, and scalability.\nFostered a culture of clean code, collaboration, and continuous improvement through agile practices and technical leadership.\nResulted in a multilingual, production-grade platform with 99.9% uptime, reduced onboarding time for new clients, and improved delivery speed across the team.\nAnalyzed user interaction data through Google Analytics and custom dashboards to identify UX bottlenecks and guide front-end optimizations."
+    },
+    "uol": {
+      "title": "UOL",
+      "role": "Senior Software Engineer",
+      "description": "Developed a corporate platform for managing job positions and company funds, overcoming the challenge of embedding a modern React application within SharePoint's legacy environment.\nWorked with Next.js and React, ensuring cross-platform compatibility, performance, and long-term maintainability.\nIntegrated the platform with multiple third-party APIs, enabling automation of workflows and data synchronization across internal systems.\nIntroduced CI/CD pipelines using GitHub Actions, and established monitoring and observability practices to ensure system stability and rapid incident response.\nBuilt a Jira automation tool with Next.js, streamlining the creation of RFCs (Requests for Change) and significantly reducing manual work for the operations team.\nActed as technical lead for a team of 5 developers, guiding architecture decisions, code reviews, and mentoring.\nCollaborated closely with backend engineers, contributing to backend adjustments in C# .NET to improve API performance and integration.\nCollaborated in the design of QA automation strategies, contributing to more reliable releases and faster feedback cycles.\nHelped modernize part of the company's internal tools infrastructure by introducing modern frontend frameworks, better development workflows, and continuous delivery culture.\nDeveloped multiple integration services using Node.js and Express, connecting internal platforms with Gupy APIs and Atlassian (Jira/Confluence) APIs to automate HR and operational workflows.\nDesigned and implemented Backend-for-Frontend (BFF) layers to aggregate and contextualize data from multiple services, optimizing frontend consumption and reducing coupling with legacy systems.\nImproved performance and frontend simplicity by centralizing business logic and authorization rules within BFFs, tailored to specific UI and product contexts.\nEnsured secure and scalable API integrations by applying best practices in authentication, error handling, and rate limiting across Express-based services."
+    },
+    "ifood": {
+      "title": "iFood",
+      "role": "Software Engineer",
+      "description": "Developed a developer-focused platform using Next.js to streamline internal processes and integrations.\nCollaborated on the React-based restaurant service platform, contributing to frontend enhancements and improved user experiences.\nPlayed an active role in enriching the company's Design System, ensuring consistency, accessibility, and scalability across multiple products.\nDesigned and implemented a no-code API integration system, enabling non-technical users to create and manage API connections easily, enhancing platform usability.\nDeveloped multiple Backend-for-Frontend (BFF) services using NestJS and Fastify, tailoring APIs to frontend needs, reducing over-fetching, and improving performance and maintainability.\nBuilt and maintained integration APIs with AWS services, supporting scalable, secure, and reliable communication between internal systems and external services.\nContributed to testing strategies, including unit and integration tests, improving overall code quality and platform reliability.\nWorked closely with cross-functional teams to align UI components with business needs, fostering faster development cycles and better product consistency.\nCollaborated with the marketing and design teams to deliver CMS-powered landing pages using Strapi and Next.js, enabling quick iterations and content updates without developer involvement."
+    },
+    "invillia": {
+      "title": "Invillia | PayGo | C6 Bank",
+      "role": "Software Engineer",
+      "description": "Maintained a legacy customer portal developed in React, addressing bugs and implementing minor enhancements to ensure system stability.\nDeveloped a new customer portal using React.js, focusing on improved user experience and interface responsiveness.\nConsumed APIs primarily through GraphQL, ensuring efficient data fetching and seamless integration with frontend components.\nParticipated actively in architectural discussions for the redesign and development of the new version of the customer portal, contributing to decisions on scalability, modularity, and technology stack.\nCollaborated in the creation of a Backend-for-Frontend (BFF) layer using Express.js, optimizing API aggregation and improving frontend performance.\nImplemented CI/CD pipelines to automate builds, tests, and deployments, increasing delivery speed and reliability.\nAdvocated and applied Test-Driven Development (TDD) practices, improving code quality and reducing defects.\nWorked closely with cross-functional teams to align frontend and backend development, fostering smooth deployment cycles and efficient issue resolution.\nDesigned and developed event-driven APIs using Apache Kafka, enabling asynchronous communication between microservices and improving system scalability and resilience.\nImplemented producers and consumers with Apache Kafka, defining event schemas and ensuring reliable message delivery, fault tolerance, and eventual consistency across distributed services."
+    },
+    "dock": {
+      "title": "Dock - (Former Conductor)",
+      "role": "Software Engineer",
+      "description": "Provided support and maintenance for the core financial transaction system responsible for credit and debit card processing, developed in C# .NET.\nDeveloped and maintained React frontend applications for managing batch processes and workflows, improving operational efficiency.\nCreated intuitive interfaces for transaction visualization and monitoring, enabling better real-time insights for the finance team.\nDesigned and implemented a dedicated project for HR, creating tools for company event management and employee raffles.\nImplemented automated tests (unit and integration) to ensure software quality and prevent regressions.\nManaged source code with Git, following best practices for branching and version control.\nParticipated in the setup and maintenance of CI/CD pipelines, enabling automated builds, tests, and deployments to improve release reliability.\nCollaborated closely with backend engineers and business teams to ensure seamless integration between frontend interfaces and backend services.\nContributed to continuous improvement initiatives by suggesting UI/UX enhancements and automating repetitive tasks through frontend solutions."
+    }
+  },
+  "skills": {
+    "title": "Skills I've acquired in these {{years}} years",
+    "categories": {
+      "langJavaScriptTypescript": "JavaScript & TypeScript",
+      "langJava": "Java",
+      "langPython": "Python",
+      "langClojure": "Clojure",
+      "langCsharp": "C#",
+      "langKotlin": "Kotlin",
+      "frontendStyling": "HTML, CSS & Styling",
+      "buildAndTooling": "Build & Tooling",
+      "dataAndMessaging": "Data, Charts & Messaging",
+      "databases": "Databases",
+      "architectureAndDesign": "Architecture and Design",
+      "apisAndIntegrations": "APIs and Integrations",
+      "stateManagement": "State Management",
+      "testingAndQuality": "Testing and Quality",
+      "uxUiAccessibility": "UX/UI & Accessibility",
+      "cloudDevops": "Cloud & DevOps",
+      "iaTools": "AI Tools",
+      "cmsAndMarketing": "CMS and Marketing",
+      "collaborationTools": "Collaboration Tools"
+    }
   }
 }

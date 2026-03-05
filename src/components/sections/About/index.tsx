@@ -34,15 +34,22 @@ const AboutSection = () => {
       </div>
 
       <section id="about" className="flex flex-col gap-16 py-8 pt-20">
-        <h2 className="text-5xl font-bold text-center max-w-2xl mx-auto leading-12">
-          {t("about.title")}
+        <h2 className="text-5xl font-bold text-center max-w-2xl mx-auto leading-14">
+          {t("about.titlePrefix")}
+          <span className="bg-linear-to-r from-cyan-400 to-lime-400 bg-clip-text text-transparent">
+            {t("about.titleHighlight1")}
+          </span>
+          {t("about.titleMiddle")}
+          <span className="bg-linear-to-r from-lime-400 to-cyan-400 bg-clip-text text-transparent">
+            {t("about.titleHighlight2")}
+          </span>
         </h2>
         <div className="flex flex-col gap-8 max-w-4xl mx-auto">
           <p className="opacity-60">{t("about.paragraph-1")}</p>
           <p className="opacity-60">{t("about.paragraph-2")}</p>
           <p className="opacity-60">{t("about.paragraph-3")}</p>
         </div>
-        <div className="bg-linear-to-r from-cyan-300 to-lime-300 z-10 relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] flex flex-col justify-center items-center gap-4 py-8">
+        <div className="bg-linear-to-r from-cyan-300 to-lime-300 z-10 relative left-1/2 right-1/2 w-screen -ml-[50vw] -mr-[50vw] flex flex-col justify-center items-center gap-4 py-16">
           <h3 className="text-LG font-bold">{t("social.title")}</h3>
           <div className="flex items-center justify-center gap-4">
             <a href="https://www.linkedin.com/in/jadson-souza/" target="_blank" rel="noopener noreferrer" className="bg-white rounded-full p-2 hover:text-cyan-500 transition-colors duration-300">

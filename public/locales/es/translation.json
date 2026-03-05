@@ -4,6 +4,7 @@
     "home": "Inicio",
     "about": "Acerca de",
     "works": "Experiencias",
+    "skills": "Habilidades",
     "contact": "Contacto"
   },
   "home": {
@@ -23,5 +24,57 @@
   },
   "social": {
     "title": "Sígueme en:"
+  },
+  "experiences": {
+    "title": "Empresas donde he trabajado",
+    "daai": {
+      "title": "Doctor Assistant AI",
+      "role": "Ingeniero de Software Senior",
+      "description": "Lideré un equipo de 5 desarrolladores en la creación de una plataforma de asistente con IA para salud, atendiendo mercados B2B y B2C.\nDiseñé e implementé APIs backend con NestJS siguiendo Clean Architecture y Domain-Driven Design (DDD), con enfoque de microservicios centrado en escalabilidad, testabilidad y límites de dominio claros.\nConstruí sistemas distribuidos integrando Redis (caché y colas), MongoDB y PostgreSQL (persistencia políglota) y RabbitMQ/Kafka para comunicación asíncrona y flujos orientados a eventos.\nIntegré capacidades de IA en la plataforma usando OpenAI, Whisper (speech-to-text) y Gemini, habilitando flujos conversacionales inteligentes, transcripción y funciones de soporte a la decisión.\nEntregué frontends con Next.js con internacionalización (i18n) completa y Tailwind CSS para desarrollo de UI escalable.\nDiseñé y mantuve una biblioteca de componentes compartidos para permitir integraciones de terceros y soluciones white-label.\nConstruí y mantuve pipelines CI/CD robustos con GitHub Actions, garantizando despliegues rápidos, confiables y automatizados.\nDesplegué y monitoreé la plataforma en Google Cloud Platform (GCP) y AWS, implementando mecanismos de recuperación ante desastres y alertas automatizadas para alta disponibilidad.\nDiseñé la plataforma para soportar más de 1.500 consultas con IA al día, garantizando rendimiento, resiliencia y escalabilidad.\nFomenté una cultura de código limpio, colaboración y mejora continua mediante prácticas ágiles y liderazgo técnico.\nResultó en una plataforma multilingüe en producción con 99,9% de uptime, reducción del tiempo de onboarding de nuevos clientes y mayor velocidad de entrega del equipo.\nAnalicé datos de interacción del usuario mediante Google Analytics y dashboards personalizados para identificar cuellos de botella de UX y orientar optimizaciones de front-end."
+    },
+    "uol": {
+      "title": "UOL",
+      "role": "Ingeniero de Software Senior",
+      "description": "Desarrollé una plataforma corporativa para gestión de vacantes y fondos de empresas, superando el desafío de incorporar una aplicación React moderna en el entorno legacy de SharePoint.\nTrabajé con Next.js y React, garantizando compatibilidad multiplataforma, rendimiento y mantenibilidad a largo plazo.\nIntegré la plataforma con múltiples APIs de terceros, permitiendo automatización de flujos y sincronización de datos entre sistemas internos.\nIntroduje pipelines CI/CD con GitHub Actions y establecí prácticas de monitoreo y observabilidad para garantizar estabilidad y respuesta rápida a incidentes.\nConstruí una herramienta de automatización Jira con Next.js, agilizando la creación de RFCs (Requests for Change) y reduciendo significativamente el trabajo manual del equipo de operaciones.\nActué como tech lead de un equipo de 5 desarrolladores, guiando decisiones de arquitectura, code reviews y mentoría.\nColaboré estrechamente con ingenieros backend, contribuyendo con ajustes en C# .NET para mejorar rendimiento e integración de las APIs.\nColaboré en el diseño de estrategias de automatización de QA, contribuyendo a releases más confiables y ciclos de feedback más rápidos.\nAyudé a modernizar parte de la infraestructura de herramientas internas de la empresa, introduciendo frameworks frontend modernos, mejores flujos de desarrollo y cultura de entrega continua.\nDesarrollé múltiples servicios de integración con Node.js y Express, conectando plataformas internas con las APIs de Gupy y Atlassian (Jira/Confluence) para automatizar flujos de RRHH y operativos.\nDiseñé e implementé capas Backend-for-Frontend (BFF) para agregar y contextualizar datos de varios servicios, optimizando el consumo en frontend y reduciendo acoplamiento con sistemas legacy.\nMejoré rendimiento y simplicidad del frontend centralizando reglas de negocio y autorización en los BFFs, adaptados a contextos específicos de UI y producto.\nGarantícé integraciones de API seguras y escalables aplicando buenas prácticas de autenticación, manejo de errores y rate limiting en los servicios en Express."
+    },
+    "ifood": {
+      "title": "iFood",
+      "role": "Ingeniero de Software",
+      "description": "Desarrollé una plataforma orientada a desarrolladores con Next.js para simplificar procesos e integraciones internas.\nColaboré en la plataforma de servicios para restaurantes en React, contribuyendo con mejoras de frontend y experiencia de usuario.\nTuve un papel activo en el enriquecimiento del Design System de la empresa, garantizando consistencia, accesibilidad y escalabilidad en múltiples productos.\nDiseñé e implementé un sistema de integración de APIs no-code, permitiendo que usuarios no técnicos crearan y gestionaran conexiones de API con facilidad.\nDesarrollé múltiples servicios Backend-for-Frontend (BFF) con NestJS y Fastify, adaptando APIs a las necesidades del frontend, reduciendo over-fetching y mejorando rendimiento y mantenibilidad.\nConstruí y mantuve APIs de integración con servicios AWS, soportando comunicación escalable, segura y confiable entre sistemas internos y servicios externos.\nContribuí a estrategias de pruebas, incluyendo unitarias y de integración, mejorando la calidad del código y la confiabilidad de la plataforma.\nTrabajé de cerca con equipos multifuncionales para alinear componentes de UI a las necesidades de negocio, favoreciendo ciclos de desarrollo más rápidos y consistencia del producto.\nColaboré con equipos de marketing y diseño en la entrega de landing pages con CMS usando Strapi y Next.js, permitiendo iteraciones rápidas y actualizaciones de contenido sin involucramiento de desarrolladores."
+    },
+    "invillia": {
+      "title": "Invillia | PayGo | C6 Bank",
+      "role": "Ingeniero de Software",
+      "description": "Mantuve un portal de clientes legacy desarrollado en React, corrigiendo bugs e implementando mejoras menores para garantizar estabilidad del sistema.\nDesarrollé un nuevo portal de clientes con React.js, con foco en mejor experiencia de usuario y responsividad de la interfaz.\nConsumí APIs principalmente vía GraphQL, garantizando obtención de datos eficiente e integración fluida con los componentes de frontend.\nParticipé activamente en discusiones de arquitectura para el rediseño y desarrollo de la nueva versión del portal de clientes, contribuyendo a decisiones sobre escalabilidad, modularidad y stack de tecnología.\nColaboré en la creación de una capa Backend-for-Frontend (BFF) con Express.js, optimizando agregación de APIs y mejorando el rendimiento del frontend.\nImplementé pipelines CI/CD para automatizar builds, pruebas y despliegues, aumentando la velocidad y confiabilidad de las entregas.\nDefendí y apliqué prácticas de Test-Driven Development (TDD), mejorando la calidad del código y reduciendo defectos.\nTrabajé de cerca con equipos multifuncionales para alinear desarrollo frontend y backend, favoreciendo ciclos de deploy fluidos y resolución eficiente de problemas.\nDiseñé y desarrollé APIs orientadas a eventos con Apache Kafka, permitiendo comunicación asíncrona entre microservicios y mejorando escalabilidad y resiliencia del sistema.\nImplementé productores y consumidores con Apache Kafka, definiendo esquemas de eventos y garantizando entrega confiable de mensajes, tolerancia a fallos y consistencia eventual entre servicios distribuidos."
+    },
+    "dock": {
+      "title": "Dock - (Antigua Conductor)",
+      "role": "Ingeniero de Software",
+      "description": "Brindé soporte y mantenimiento para el sistema central de transacciones financieras responsable del procesamiento de tarjetas de crédito y débito, desarrollado en C# .NET.\nDesarrollé y mantuve aplicaciones frontend en React para la gestión de procesos por lotes y flujos de trabajo, mejorando la eficiencia operativa.\nCreé interfaces intuitivas para la visualización y monitoreo de transacciones, facilitando el acceso a información en tiempo real para el equipo financiero.\nDiseñé e implementé un proyecto dedicado a RRHH, creando herramientas para la gestión de eventos de la empresa y sorteos de empleados.\nImplementé pruebas automatizadas (unitarias e integración) para asegurar la calidad del software y prevenir regresiones.\nGestioné el código fuente con Git, siguiendo mejores prácticas de ramificación y control de versiones.\nParticipé en la configuración y mantenimiento de pipelines CI/CD, permitiendo compilaciones, pruebas y despliegues automáticos para mejorar la confiabilidad de las entregas.\nColaboré estrechamente con ingenieros backend y equipos de negocio para asegurar una integración fluida entre las interfaces frontend y los servicios backend.\nContribuí a iniciativas de mejora continua sugiriendo mejoras en UI/UX y automatizando tareas repetitivas mediante soluciones frontend."
+    }
+  },
+  "skills": {
+    "title": "Habilidades que adquirí en estos {{years}} años",
+    "categories": {
+      "langJavaScriptTypescript": "JavaScript y TypeScript",
+      "langJava": "Java",
+      "langPython": "Python",
+      "langClojure": "Clojure",
+      "langCsharp": "C#",
+      "langKotlin": "Kotlin",
+      "frontendStyling": "HTML, CSS y Estilos",
+      "buildAndTooling": "Build y Herramientas",
+      "dataAndMessaging": "Datos, Gráficos y Mensajería",
+      "databases": "Bases de Datos",
+      "architectureAndDesign": "Arquitectura y Diseño",
+      "apisAndIntegrations": "APIs e Integraciones",
+      "stateManagement": "Gestión de Estado",
+      "testingAndQuality": "Pruebas y Calidad",
+      "uxUiAccessibility": "UX/UI y Accesibilidad",
+      "cloudDevops": "Cloud y DevOps",
+      "iaTools": "Herramientas de IA",
+      "cmsAndMarketing": "CMS y Marketing",
+      "collaborationTools": "Herramientas de Colaboración"
+    }
   }
 }
