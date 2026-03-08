@@ -32,6 +32,7 @@ const SKILLS_BY_CATEGORY: Record<string, string[]> = {
   dataAndMessaging: ["Rechart", "D3.js", "RabbitMQ", "Apache Kafka"],
   databases: [
     "Postgres",
+    "PGVector",
     "MySQL",
     "Mongo / Atlas",
     "Redis",
@@ -85,6 +86,8 @@ const SKILLS_BY_CATEGORY: Record<string, string[]> = {
     "MCP",
     "Skills",
     "Agentic",
+    "n8n",
+    "Rag",
   ],
   cmsAndMarketing: ["Wordpress", "Strapi", "Google Analytics", "Hotjar", "Hubspot", "Contentful", "Sanity", "DatoCMS", "Prismic", "Storyblok"],
   collaborationTools: ["Jira", "Pipefy", "Linear", "Confluence", "Notion", "Slack"],
