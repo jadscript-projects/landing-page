@@ -2,22 +2,14 @@
 #
 # Authentication — pick ONE approach (repository Variables / Secrets):
 #
-# A) Workload Identity Federation (recommended; no JSON key — required if org policy
-#    iam.disableServiceAccountKeyCreation is enforced):
-#   Variables: GCP_USE_WIF = true
-#              GCP_WORKLOAD_IDENTITY_PROVIDER = projects/…/locations/…/providers/…
-#              GCP_SERVICE_ACCOUNT = your-sa@project.iam.gserviceaccount.com
+# A) Workload Identity Federation (recommended): use the variables GCP_WORKLOAD_IDENTITY_PROVIDER +
+#    GCP_SERVICE_ACCOUNT (set GCP_USE_WIF=true only if you want to explicitly validate).
+# B) JSON Key: secret GCP_SA_KEY (not available in forked PRs).
+# Common variable: GCP_BUCKET. For details and gcloud commands, see DEPLOY.md.
 #
-# B) Service account key (only if your org allows key creation):
-#   Secret: GCP_SA_KEY — full JSON key (do not set GCP_USE_WIF to true)
-#
-# Common variable:
-#   GCP_BUCKET — GCS bucket name (e.g. landing-page)
-#
-# WIF setup: https://github.com/google-github-actions/auth#workload-identity-federation
-#
-# Fork PRs: secrets are not available to workflows from forks; use WIF + repo variables,
-# or skip deploy on pull_request from forks.
+# If GCP_* live under a GitHub Environment, set repository variable DEPLOY_ENVIRONMENT to
+# that environment's name (e.g. production) so the job can reference it without a literal
+# that some IDEs wrongly flag as invalid.
 
 name: Deploy to GCS
 
@@ -32,6 +24,8 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Repository variable DEPLOY_ENVIRONMENT = GitHub Environment name where GCP_* live (e.g. production)
+    environment: ${{ vars.DEPLOY_ENVIRONMENT }}
     permissions:
       contents: read
       id-token: write
@@ -39,6 +33,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+
+      - name: Require repository variable DEPLOY_ENVIRONMENT
+        env:
+          DEPLOY_ENVIRONMENT: ${{ vars.DEPLOY_ENVIRONMENT }}
+        run: |
+          if [ -z "$DEPLOY_ENVIRONMENT" ]; then
+            echo "::error::Set repository variable DEPLOY_ENVIRONMENT to the GitHub Environment name that holds your GCP_* variables (e.g. production). Settings → Actions → Variables → Repository variables."
+            exit 1
+          fi
 
       - name: Install pnpm
         uses: pnpm/action-setup@v5
@@ -57,8 +60,8 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      # Fail fast with a clear message — auth@v3 errors if both WIF inputs and credentials_json are empty/missing.
-      - name: Validate GCP auth configuration
+      - name: Require GCP authentication (WIF or JSON key)
+        id: gcp_auth
         env:
           GCP_USE_WIF: ${{ vars.GCP_USE_WIF }}
           GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
@@ -66,27 +69,59 @@ jobs:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
         run: |
           set -e
-          if [ "$GCP_USE_WIF" = "true" ]; then
-            if [ -z "$GCP_WORKLOAD_IDENTITY_PROVIDER" ] || [ -z "$GCP_SERVICE_ACCOUNT" ]; then
-              echo "::error title=Missing WIF variables::When repository variable GCP_USE_WIF is \"true\", set GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT."
-              exit 1
-            fi
-          else
-            if [ -z "$GCP_SA_KEY" ]; then
-              echo "::error title=Missing GCP_SA_KEY::Set repository secret GCP_SA_KEY, or set GCP_USE_WIF=true with WIF variables. Secrets are not passed to workflows from forks (including some Dependabot jobs)."
-              exit 1
-            fi
+          wif_complete=0
+          if [ -n "$GCP_WORKLOAD_IDENTITY_PROVIDER" ] && [ -n "$GCP_SERVICE_ACCOUNT" ]; then
+            wif_complete=1
           fi
 
+          if [ "$GCP_USE_WIF" = "true" ] && [ "$wif_complete" -ne 1 ]; then
+            echo "::error::When GCP_USE_WIF is true, you must set GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT (GitHub → Settings → Secrets and variables → Actions → Variables)."
+            exit 1
+          fi
+
+          if [ "$wif_complete" -eq 1 ]; then
+            echo "mode=wif" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ -n "$GCP_SA_KEY" ]; then
+            echo "mode=key" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          {
+            echo "::error::No GCP authentication configured. Choose ONE of the following."
+            echo ""
+            echo "Option A — Workload Identity Federation (recommended; works on fork PRs without a JSON secret)"
+            echo "  Where: GitHub → Settings → Secrets and variables → Actions → Variables"
+            echo "  • GCP_WORKLOAD_IDENTITY_PROVIDER — full provider resource string, format:"
+            echo "    projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID"
+            echo "    How to obtain: after creating the pool/provider in GCP (see DEPLOY.md §1.4), run in Cloud Shell or locally:"
+            echo "    echo \"projects/\${PROJECT_NUMBER}/locations/global/workloadIdentityPools/\${POOL_ID}/providers/\${PROVIDER_ID}\""
+            echo "    PROJECT_NUMBER: gcloud projects describe YOUR_PROJECT_ID --format='value(projectNumber)'"
+            echo "  • GCP_SERVICE_ACCOUNT — service account email used for deploy, e.g.:"
+            echo "    github-actions-gcs-deploy@YOUR_PROJECT_ID.iam.gserviceaccount.com"
+            echo "    How to obtain: GCP Console → IAM → Service accounts, or SA_EMAIL from DEPLOY.md commands."
+            echo ""
+            echo "Option B — JSON key secret (only if your organization allows key creation)"
+            echo "  Where: GitHub → Actions → Secrets → GCP_SA_KEY (paste the full JSON)"
+            echo "  How to obtain: GCP → Service account → Keys → Add key → JSON (unless iam.disableServiceAccountKeyCreation blocks it)."
+            echo ""
+            echo "Required for sync: GCP_BUCKET variable (bucket name, e.g. landing-page)."
+            echo "Step-by-step documentation: DEPLOY.md in this repository."
+            echo "Note: workflows on fork PRs do not receive secrets; use Option A on the upstream repository."
+          } >&2
+          exit 1
+
       - name: Authenticate to Google Cloud (Workload Identity Federation)
-        if: ${{ vars.GCP_USE_WIF == 'true' && vars.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && vars.GCP_SERVICE_ACCOUNT != '' }}
+        if: steps.gcp_auth.outputs.mode == 'wif'
         uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
 
       - name: Authenticate to Google Cloud (service account key)
-        if: ${{ vars.GCP_USE_WIF != 'true' }}
+        if: steps.gcp_auth.outputs.mode == 'key'
         uses: google-github-actions/auth@v3
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
@@ -99,7 +134,7 @@ jobs:
           GCP_BUCKET: ${{ vars.GCP_BUCKET }}
         run: |
           if [ -z "$GCP_BUCKET" ]; then
-            echo "Set the GCP_BUCKET repository variable (GCS bucket name)."
+            echo "::error::Set the GCP_BUCKET repository variable (GCS bucket name)."
             exit 1
           fi
           gcloud storage rsync dist/ "gs://${GCP_BUCKET}/" \
