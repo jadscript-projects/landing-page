@@ -1,0 +1,83 @@
+# Vite build and deploy to a Google Cloud Storage bucket.
+#
+# Authentication — pick ONE approach (repository Variables / Secrets):
+#
+# A) Workload Identity Federation (recommended; no JSON key — required if org policy
+#    iam.disableServiceAccountKeyCreation is enforced):
+#   Variables: GCP_USE_WIF = true
+#              GCP_WORKLOAD_IDENTITY_PROVIDER = projects/…/locations/…/providers/…
+#              GCP_SERVICE_ACCOUNT = your-sa@project.iam.gserviceaccount.com
+#
+# B) Service account key (only if your org allows key creation):
+#   Secret: GCP_SA_KEY — full JSON key (do not set GCP_USE_WIF to true)
+#
+# Common variable:
+#   GCP_BUCKET — GCS bucket name (e.g. landing-page)
+#
+# WIF setup: https://github.com/google-github-actions/auth#workload-identity-federation
+
+name: Deploy to GCS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 9
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Authenticate to Google Cloud (Workload Identity Federation)
+        if: ${{ vars.GCP_USE_WIF == 'true' }}
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+
+      - name: Authenticate to Google Cloud (service account key)
+        if: ${{ vars.GCP_USE_WIF != 'true' }}
+        uses: google-github-actions/auth@v3
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v3
+
+      - name: Sync dist/ to bucket
+        env:
+          GCP_BUCKET: ${{ vars.GCP_BUCKET }}
+        run: |
+          if [ -z "$GCP_BUCKET" ]; then
+            echo "Set the GCP_BUCKET repository variable (GCS bucket name)."
+            exit 1
+          fi
+          gcloud storage rsync dist/ "gs://${GCP_BUCKET}/" \
+            --recursive \
+            --delete-unmatched-destination-objects

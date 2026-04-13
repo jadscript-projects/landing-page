@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Local deploy notes / pasted credentials (never commit)
+DEPLOY.secrets.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
