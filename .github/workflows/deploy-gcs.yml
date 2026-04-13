@@ -15,6 +15,9 @@
 #   GCP_BUCKET — GCS bucket name (e.g. landing-page)
 #
 # WIF setup: https://github.com/google-github-actions/auth#workload-identity-federation
+#
+# Fork PRs: secrets are not available to workflows from forks; use WIF + repo variables,
+# or skip deploy on pull_request from forks.
 
 name: Deploy to GCS
 
@@ -54,8 +57,29 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      # Fail fast with a clear message — auth@v3 errors if both WIF inputs and credentials_json are empty/missing.
+      - name: Validate GCP auth configuration
+        env:
+          GCP_USE_WIF: ${{ vars.GCP_USE_WIF }}
+          GCP_WORKLOAD_IDENTITY_PROVIDER: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          GCP_SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        run: |
+          set -e
+          if [ "$GCP_USE_WIF" = "true" ]; then
+            if [ -z "$GCP_WORKLOAD_IDENTITY_PROVIDER" ] || [ -z "$GCP_SERVICE_ACCOUNT" ]; then
+              echo "::error title=Missing WIF variables::When repository variable GCP_USE_WIF is \"true\", set GCP_WORKLOAD_IDENTITY_PROVIDER and GCP_SERVICE_ACCOUNT."
+              exit 1
+            fi
+          else
+            if [ -z "$GCP_SA_KEY" ]; then
+              echo "::error title=Missing GCP_SA_KEY::Set repository secret GCP_SA_KEY, or set GCP_USE_WIF=true with WIF variables. Secrets are not passed to workflows from forks (including some Dependabot jobs)."
+              exit 1
+            fi
+          fi
+
       - name: Authenticate to Google Cloud (Workload Identity Federation)
-        if: ${{ vars.GCP_USE_WIF == 'true' }}
+        if: ${{ vars.GCP_USE_WIF == 'true' && vars.GCP_WORKLOAD_IDENTITY_PROVIDER != '' && vars.GCP_SERVICE_ACCOUNT != '' }}
         uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
